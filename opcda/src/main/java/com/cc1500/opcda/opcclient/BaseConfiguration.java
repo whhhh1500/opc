@@ -24,7 +24,7 @@ public final class BaseConfiguration {
     public static final String CONFIG_DOMAIN = "domain";
     public static final String CONFIG_CLSID = "clsid";
     public static final String CONFIG_PROGID = "progid";
-    private static final String CONFIG_FILE_NAME = "templates/config.properties";
+    private static final String CONFIG_FILE_NAME = "config.properties";
 
     public BaseConfiguration() {
     }
