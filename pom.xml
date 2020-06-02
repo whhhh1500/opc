@@ -29,27 +29,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.milo</groupId>
-			<artifactId>sdk-client</artifactId>
-			<version>0.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.milo</groupId>
-			<artifactId>sdk-server</artifactId>
-			<version>0.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.milo</groupId>
-			<artifactId>stack-client</artifactId>
-			<version>0.4.1</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.eclipse.milo</groupId>
-			<artifactId>stack-server</artifactId>
-			<version>0.4.1</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
