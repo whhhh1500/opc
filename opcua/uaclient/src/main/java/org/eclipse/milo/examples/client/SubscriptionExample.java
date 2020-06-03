@@ -10,6 +10,7 @@
 
 package org.eclipse.milo.examples.client;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -49,15 +50,15 @@ public class SubscriptionExample implements ClientExample {
         // synchronous connect
         client.connect().get();
 
-        // create a subscription @ 1000ms
+        // 创建一个订阅，轮训时间为1000ms create a subscription @ 1000ms
         UaSubscription subscription = client.getSubscriptionManager()
                 .createSubscription(1000.0).get();
 
-        // subscribe to the Value attribute of the server's CurrentTime node
+        // 订阅服务器节点的Value属性/////// subscribe to the Value attribute of the server's CurrentTime node
         ReadValueId readValueId = new ReadValueId(
-            //Identifiers.Server_ServerStatus_CurrentTime,
+                //Identifiers.Server_ServerStatus_CurrentTime,
                 new NodeId(5, "Expression1"),
-            AttributeId.Value.uid(), null, QualifiedName.NULL_VALUE
+                AttributeId.Value.uid(), null, QualifiedName.NULL_VALUE
         );
 
         // IMPORTANT: client handle must be unique per item within the context of a subscription.
@@ -78,6 +79,8 @@ public class SubscriptionExample implements ClientExample {
             MonitoringMode.Reporting,
             parameters
         );
+        List<MonitoredItemCreateRequest> requests = new ArrayList<>();
+        requests.add(request);
 
         // when creating items in MonitoringMode.Reporting this callback is where each item needs to have its
         // value/event consumer hooked up. The alternative is to create the item in sampling mode, hook up the
@@ -87,7 +90,7 @@ public class SubscriptionExample implements ClientExample {
 
         List<UaMonitoredItem> items = subscription.createMonitoredItems(
             TimestampsToReturn.Both,
-            newArrayList(request),
+            requests,
             onItemCreated
         ).get();
 
