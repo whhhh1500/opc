@@ -10,10 +10,6 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
@@ -26,6 +22,10 @@ import org.eclipse.milo.opcua.stack.core.types.structured.ReferenceDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 import static org.eclipse.milo.opcua.stack.core.util.ConversionUtil.toList;
 
@@ -34,7 +34,7 @@ public class BrowseExample implements ClientExample {
     public static void main(String[] args) throws Exception {
         BrowseExample example = new BrowseExample();
 
-        new ClientExampleRunner(example).run();
+            new ClientExampleRunner(example).run();
     }
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -66,10 +66,14 @@ public class BrowseExample implements ClientExample {
             List<ReferenceDescription> references = toList(browseResult.getReferences());
 
             for (ReferenceDescription rd : references) {
-                logger.info("{} Node={}", indent, rd.getBrowseName().getName());
-
-                // recursively browse to children
-                rd.getNodeId().local().ifPresent(nodeId -> browseNode(indent + "  ", client, nodeId));
+                if(rd.getBrowseName().getNamespaceIndex().intValue()==5) {
+                    //System.out.println(rd.getBrowseName().getNamespaceIndex().getClass()+"" +
+                    //        );
+                    logger.info("{} Node=[{},{}", indent, rd.getBrowseName().getName()
+                    ,rd.getBrowseName().getNamespaceIndex());
+                    // recursively browse to children
+                    rd.getNodeId().local().ifPresent(nodeId -> browseNode(indent + "  ", client, nodeId));
+                }
             }
         } catch (InterruptedException | ExecutionException e) {
             logger.error("Browsing nodeId={} failed: {}", browseRoot, e.getMessage(), e);

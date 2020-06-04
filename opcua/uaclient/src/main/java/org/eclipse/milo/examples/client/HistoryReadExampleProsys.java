@@ -93,9 +93,9 @@ public class HistoryReadExampleProsys implements ClientExample {
         future.complete(client);
     }
 
-    @Override                             //"opc.tcp://SHUAIBI:53530/OPCUA/SimulationServer"
+    @Override                             //"com.cc1500.extension.opc.tcp://SHUAIBI:53530/OPCUA/SimulationServer"
     public String getEndpointUrl() {
-        return "opc.tcp://SHUAIBI:53530/OPCUA/SimulationServer";
+        return "com.cc1500.extension.opc.tcp://SHUAIBI:53530/OPCUA/SimulationServer";
     }
 
 }

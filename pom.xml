@@ -13,9 +13,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cc1500</groupId>
-	<artifactId>opc</artifactId>
+	<artifactId>com.cc1500.extension.opc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>opc</name>
+	<name>com.cc1500.extension.opc</name>
 	<packaging>pom</packaging>
 	<description>Simple data acquisition program</description>
 

@@ -10,16 +10,10 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
-
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaMonitoredItem;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaSubscription;
 import org.eclipse.milo.opcua.stack.core.AttributeId;
-import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.eclipse.milo.opcua.stack.core.types.builtin.QualifiedName;
@@ -32,7 +26,11 @@ import org.eclipse.milo.opcua.stack.core.types.structured.ReadValueId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.google.common.collect.Lists.newArrayList;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
+
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 
 public class SubscriptionExample implements ClientExample {
@@ -105,13 +103,13 @@ public class SubscriptionExample implements ClientExample {
         }
 
         // let the example run for 5 seconds then terminate
-        Thread.sleep(5000);
-        future.complete(client);
+        //Thread.sleep(5000);
+        //future.complete(client);
     }
 
     private void onSubscriptionValue(UaMonitoredItem item, DataValue value) {
         logger.info(
-            "subscription value received: item={}, value={}",
+            " item={}, value={}",
             item.getReadValueId().getNodeId(), value.getValue());
     }
 

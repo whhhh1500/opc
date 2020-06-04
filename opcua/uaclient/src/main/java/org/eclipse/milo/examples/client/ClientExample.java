@@ -10,21 +10,21 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Predicate;
-
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.identity.AnonymousProvider;
 import org.eclipse.milo.opcua.sdk.client.api.identity.IdentityProvider;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;
 import org.eclipse.milo.opcua.stack.core.types.structured.EndpointDescription;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Predicate;
+
 
 public interface ClientExample {
 
-    //默认url//opc.tcp://zhangs:53530/OPCUA/SimulationServer
+    //默认url//com.cc1500.extension.opc.tcp://zhangs:53530/OPCUA/SimulationServer
     default String getEndpointUrl() {
-        return "opc.tcp://SHUAIBI:53530/OPCUA/SimulationServer";
+        return "opc.tcp://ZHANGS:53530/OPCUA/SimulationServer";
     }
 
     default Predicate<EndpointDescription> endpointFilter() {

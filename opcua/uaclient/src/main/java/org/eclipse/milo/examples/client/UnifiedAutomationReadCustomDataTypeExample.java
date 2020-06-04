@@ -10,8 +10,6 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.concurrent.CompletableFuture;
-
 import org.eclipse.milo.examples.client.reader.DataTypeDictionarySessionInitializer;
 import org.eclipse.milo.opcua.binaryschema.GenericBsdParser;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
@@ -21,6 +19,8 @@ import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.eclipse.milo.opcua.stack.core.types.enumerated.TimestampsToReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * An example that shows reading the value of a node whose DataType is a custom structure type.
@@ -67,7 +67,7 @@ public class UnifiedAutomationReadCustomDataTypeExample implements ClientExample
     @Override
     public String getEndpointUrl() {
         // Change this if UaCPPServer is running somewhere other than localhost.
-        return "opc.tcp://localhost:48010";
+        return "com.cc1500.extension.opc.tcp://localhost:48010";
     }
 
 }

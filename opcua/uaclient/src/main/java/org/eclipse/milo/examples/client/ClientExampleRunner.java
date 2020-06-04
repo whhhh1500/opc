@@ -10,14 +10,6 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.Security;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.eclipse.milo.examples.server.ExampleServer;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
@@ -25,6 +17,13 @@ import org.eclipse.milo.opcua.stack.core.Stack;
 import org.eclipse.milo.opcua.stack.core.types.builtin.LocalizedText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.Security;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 
@@ -91,7 +90,7 @@ public class ClientExampleRunner {
     public void run() {
         try {
             OpcUaClient client = createClient();
-
+            //
             future.whenCompleteAsync((c, ex) -> {
                 if (ex != null) {
                     logger.error("Error running example: {}", ex.getMessage(), ex);
@@ -117,7 +116,7 @@ public class ClientExampleRunner {
 
             try {
                 clientExample.run(client, future);
-                future.get(15, TimeUnit.SECONDS);
+                //future.get(15, TimeUnit.SECONDS);
             } catch (Throwable t) {
                 logger.error("Error running client example: {}", t.getMessage(), t);
                 future.completeExceptionally(t);
@@ -136,7 +135,7 @@ public class ClientExampleRunner {
         }
 
         try {
-            Thread.sleep(999_999_999);
+            Thread.sleep(30_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

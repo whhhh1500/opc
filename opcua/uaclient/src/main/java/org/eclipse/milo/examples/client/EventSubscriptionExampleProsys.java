@@ -20,7 +20,7 @@ public class EventSubscriptionExampleProsys extends EventSubscriptionExample {
 
     @Override
     public String getEndpointUrl() {
-        return "opc.tcp://localhost:53530/OPCUA/SimulationServer";
+        return "com.cc1500.extension.opc.tcp://localhost:53530/OPCUA/SimulationServer";
     }
 
 }

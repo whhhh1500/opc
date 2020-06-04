@@ -10,16 +10,16 @@
 
 package org.eclipse.milo.examples.client;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.nodes.Node;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class BrowseNodeExample implements ClientExample {
 
@@ -48,11 +48,17 @@ public class BrowseNodeExample implements ClientExample {
             List<Node> nodes = client.getAddressSpace().browse(browseRoot).get();
 
             for (Node node : nodes) {
-                logger.info("{} Node={},{}", indent, node.getBrowseName().get().getName()
-                ,node.getBrowseName().get().getNamespaceIndex());
+                //空间名为5 输出
+                int space=node.getBrowseName().get().getNamespaceIndex().intValue();
+                if(space==5) {
+                    logger.info("{} Node={},{}，{}", indent, node.getBrowseName().get().getName()
+                            , node.getBrowseName().get().getNamespaceIndex()
+                    ,node.getBrowseName().toString());
+                }
+                    // recursively browse to children
+                    browseNode(indent + "  ", client, node.getNodeId().get());
 
-                // recursively browse to children
-                browseNode(indent + "  ", client, node.getNodeId().get());
+
             }
         } catch (InterruptedException | ExecutionException e) {
             logger.error("Browsing nodeId={} failed: {}", browseRoot, e.getMessage(), e);
