@@ -20,11 +20,23 @@
         <groupId>org.eclipse.milo</groupId>
         <artifactId>sdk-server</artifactId>
         <version>0.4.1</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>slf4j-api</artifactId>
+                <groupId>org.slf4j</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.eclipse.milo</groupId>
         <artifactId>bsd-parser-core</artifactId>
         <version>0.3.8</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>stack-core</artifactId>
+                <groupId>org.eclipse.milo</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.eclipse.milo</groupId>
@@ -35,7 +47,21 @@
         <groupId>com.cc1500</groupId>
         <artifactId>uaserver</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>logback-core</artifactId>
+                <groupId>ch.qos.logback</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.12</version>
+        <scope>provided</scope>
+    </dependency>
+
 </dependencies>
     <build>
         <plugins>

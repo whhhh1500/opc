@@ -1,7 +1,7 @@
-package org.eclipse.milo.examples.client.demo;
+package com.cc1500.read;
 
-import org.eclipse.milo.examples.client.client.ClientExample;
-import org.eclipse.milo.examples.client.client.ClientExampleRunner;
+import com.cc1500.client.ClientExample;
+import com.cc1500.read.conf.NodesConfiguration;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaMonitoredItem;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaSubscription;
@@ -16,7 +16,6 @@ import org.eclipse.milo.opcua.stack.core.types.structured.MonitoringParameters;
 import org.eclipse.milo.opcua.stack.core.types.structured.ReadValueId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +24,15 @@ import java.util.function.BiConsumer;
 
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 
-public class Read implements ClientExample {
-    @Autowired
-    private  Configuration configuration;
+public class Read implements ClientExample  {
 
-    public static void init() throws Exception {
-
-        Read example = new Read();
-
-        new ClientExampleRunner(example).run();
-
+    private NodesConfiguration configuration;
+    public Read(NodesConfiguration configuration){
+        this.configuration=configuration;
     }
+
+
+
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -47,17 +44,23 @@ public class Read implements ClientExample {
         // 创建一个订阅，轮训时间为1000ms create a subscription @ 1000ms
         UaSubscription subscription = client.getSubscriptionManager()
                 .createSubscription(1000.0).get();
-        int size=  configuration.getNodelist().size();
-        List<String> nodes=configuration.getNodelist();
+        List<String> nodes;
+        if ( configuration==null){
+            nodes=new ArrayList<String>();
+            nodes.add("5,Square1");
+        }else {
+            nodes= configuration.getNodelist();
+        }
 
+
+        int size=  nodes.size();
         List<MonitoredItemCreateRequest> requests = new ArrayList<>();
         for (int i = 0; i <size ; i++) {
             // 订阅服务器节点的Value属性/////// subscribe to the Value attribute of the server's CurrentTime node
             ReadValueId readValueId = new ReadValueId(
                     //Identifiers.Server_ServerStatus_CurrentTime,
-                    new NodeId(Integer.parseInt(nodes.get(i).split(",")[1]), nodes.get(i)),
-                    AttributeId.Value.uid(), null, QualifiedName.NULL_VALUE
-            );
+                    new NodeId(Integer.parseInt(nodes.get(i).split(",")[0]), nodes.get(i).split(",")[1]),
+                    AttributeId.Value.uid(), null, QualifiedName.NULL_VALUE);
             MonitoringParameters parameters = new MonitoringParameters(
                     uint(i+1),
                     1000.0,     // sampling interval
@@ -88,7 +91,6 @@ public class Read implements ClientExample {
                         item.getReadValueId().getNodeId(), item.getStatusCode());
             }
         }
-
         //// let the example run for 5 seconds then terminate
         //Thread.sleep(5000);
         //future.complete(client);
@@ -99,5 +101,6 @@ public class Read implements ClientExample {
                 " item=【{}】, value=【{}}",
                 item.getReadValueId().getNodeId(), value.getValue());
     }
+
 
 }

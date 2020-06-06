@@ -12,7 +12,6 @@
     <modules>
         <module>uaclient</module>
         <module>uaserver</module>
-        <module>miloold</module>
     </modules>
     <artifactId>opcua</artifactId>
 

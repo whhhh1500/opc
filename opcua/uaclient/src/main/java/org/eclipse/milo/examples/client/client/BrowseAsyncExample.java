@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-package org.eclipse.milo.examples.client;
+package org.eclipse.milo.examples.client.client;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;

@@ -1,7 +1,7 @@
-package org.eclipse.milo.examples.client.demo;
+package com.cc1500.read;
 
-import org.eclipse.milo.examples.client.client.ClientExample;
-import org.eclipse.milo.examples.client.client.ClientExampleRunner;
+import com.cc1500.client.ClientExample;
+import com.cc1500.client.ClientExampleRunner;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaMonitoredItem;
 import org.eclipse.milo.opcua.sdk.client.api.subscriptions.UaSubscription;

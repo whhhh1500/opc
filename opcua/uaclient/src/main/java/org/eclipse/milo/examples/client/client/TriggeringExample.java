@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-package org.eclipse.milo.examples.client;
+package org.eclipse.milo.examples.client.client;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

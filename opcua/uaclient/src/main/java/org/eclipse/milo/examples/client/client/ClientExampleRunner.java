@@ -8,15 +8,17 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 
-package org.eclipse.milo.examples.client;
+package org.eclipse.milo.examples.client.client;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.eclipse.milo.examples.client.demo.Configuration;
 import org.eclipse.milo.examples.server.ExampleServer;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.stack.core.Stack;
 import org.eclipse.milo.opcua.stack.core.types.builtin.LocalizedText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,7 +30,8 @@ import java.util.concurrent.ExecutionException;
 import static org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.Unsigned.uint;
 
 public class ClientExampleRunner {
-
+    @Autowired
+    private Configuration configuration;
     static {
         // Required for SecurityPolicy.Aes256_Sha256_RsaPss
         Security.addProvider(new BouncyCastleProvider());
@@ -71,6 +74,7 @@ public class ClientExampleRunner {
 
         return OpcUaClient.create(
             clientExample.getEndpointUrl(),
+              //  configuration.getServer().get() ,
             endpoints ->
                 endpoints.stream()
                     .filter(clientExample.endpointFilter())
