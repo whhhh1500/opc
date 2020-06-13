@@ -19,9 +19,9 @@ public class StartRunner implements CommandLineRunner {
     @GetMapping("/run")
     public void run() throws Exception {
         System.out.println("StartRunner :"+configuration);
-        run();
+
     }
-    @GetMapping("/run")
+    @GetMapping("/stop")
     public void stop() throws Exception {
         System.out.println("StartRunner :"+configuration);
         run();
